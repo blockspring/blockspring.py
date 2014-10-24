@@ -9,7 +9,7 @@ License: MIT
 Description: UNKNOWN
 Keywords: blockspring function cloud api service library development
 Platform: UNKNOWN
-Classifier: 5 - Production/Stable
+Classifier: Development Status :: 5 - Production/Stable
 Classifier: Intended Audience :: Developers
 Classifier: Topic :: Software Development :: Build Tools
 Classifier: License :: OSI Approved :: MIT License
