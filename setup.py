@@ -10,7 +10,7 @@ with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
 
 setup(
 	name = "blockspring",
-	version = "0.1.1.dev1",
+	version = "0.1.2",
 	description='Blockspring api wrapper',
 	long_description=long_description,
 
@@ -30,7 +30,7 @@ setup(
 	    #   3 - Alpha
 	    #   4 - Beta
 	    #   5 - Production/Stable
-	    'Development Status :: 3 - Alpha',
+	    '5 - Production/Stable',
 
 	    # Indicate who your project is intended for
 	    'Intended Audience :: Developers',
