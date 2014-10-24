@@ -16,7 +16,7 @@ import blockspring
 def myFunction(request, response):
     mySum = request["params"]["num1"] + request["params"]["num2"]
     
-    response.addOutput('sum', data["sum"])
+    response.addOutput('sum', mySum)
 
     response.end()
 
