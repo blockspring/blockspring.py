@@ -1,13 +1,13 @@
 Metadata-Version: 1.1
 Name: blockspring
-Version: 0.1.0.dev1
+Version: 0.1.1.dev1
 Summary: Blockspring api wrapper
 Home-page: https://www.blockspring.com
 Author: Blockspring
 Author-email: paul@blockspring.com
 License: MIT
 Description: UNKNOWN
-Keywords: blockspring api development
+Keywords: blockspring function cloud api service library development
 Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers

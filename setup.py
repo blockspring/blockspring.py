@@ -10,7 +10,7 @@ with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
 
 setup(
 	name = "blockspring",
-	version = "0.1.0.dev1",
+	version = "0.1.1.dev1",
 	description='Blockspring api wrapper',
 	long_description=long_description,
 
@@ -51,10 +51,10 @@ setup(
 	],
 
 	# What does your project relate to?
-	keywords='blockspring api development',
+	keywords='blockspring function cloud api service library development',
 
 	packages=find_packages(),
 
-	install_requires=[]
+	install_requires=['requests']
 		
 )
