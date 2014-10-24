@@ -18,11 +18,10 @@ def run(block, data):
 
 	response = requests.post( blockspring_url + "/api_v2/blocks/" + block + "?api_key=" + api_key, data = data )
 
-	print response
-	body = response.json()
-
+	body = response.text
+	
 	try:
-		body["results"] = json.loads(body["results"])
+		body = json.loads(body)
 		return body
 	except:
 		return body
