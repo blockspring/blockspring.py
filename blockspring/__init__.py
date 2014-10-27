@@ -130,11 +130,10 @@ def define(block = None):
 			request.params[key] = argv[key]
 
 	request = Request()
-	response = Response()
-
 	processStdin(request)
 	processArgs(request)
 
+	response = Response()
 	block(request, response)
 
 class Request:
