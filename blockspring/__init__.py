@@ -164,7 +164,7 @@ class Response:
 		}
 		return self
 
-	def addError(self, title, message = None):
+	def addErrorOutput(self, title, message = None):
 		self.result["_errors"].append({
 			"title": title,
 			"message": message
