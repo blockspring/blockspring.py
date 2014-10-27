@@ -8,34 +8,27 @@ import re
 import tempfile
 from urlparse import urlparse
 
-def run(block = None, data = None, api_key = None):
-	if(not(block)):
-		raise Exception("you forgot to pass in your block!")
+def run(block, data = {}, api_key = None):
+	if type(data) is not dict:
+		raise Exception("your data needs to be a dictionary.")
 
-	if(not(data)):
-		data = {}
-	try:
-		data = json.dumps(data)
-	except:
-		raise Exception("your data needs to be json.")
+	data = json.dumps(data)
 
 	api_key = api_key or os.environ.get('BLOCKSPRING_API_KEY')
 	if(not(api_key)):
 		api_key = ""
+	
 	blockspring_url = os.environ.get('BLOCKSPRING_URL') or 'https://sender.blockspring.com'
-
 	block = block.split("/")[-1]
 	response = requests.post( blockspring_url + "/api_v2/blocks/" + block + "?api_key=" + api_key, data = data , headers = {'content-type': 'application/json'})
+	
 	results = response.text
 	try:
 		return json.loads(results)
 	except:
 		return results
 
-def define(block = None):
-	if (not(block)):
-		raise Exception("you forgot to pass in your function!")
-
+def define(block):
 	def processStdin(request):
 		# check if something coming into stdin
 		if(not(sys.stdin.isatty())):
