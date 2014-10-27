@@ -76,25 +76,33 @@ def define(block = None):
 						(("data" in params[var_name]) and params[var_name]["data"] is not None) or 
 						(("url" in params[var_name]) and params[var_name]["url"] is not None))
 					):
+						# create tmp file
 						suffix = "-%s" % params[var_name]["filename"]
 					  	tmp_file = tempfile.NamedTemporaryFile(suffix=suffix, delete=False)
+					  	# check if we have raw data
 					  	if ("data" in params[var_name]):
 					  		try:
+					  			# decode raw data and save to tmp file
 						  		tmp_file.write(base64.b64decode(params[var_name]["data"]))
 						  		request.params[var_name] = tmp_file.name
 						  	except:
+						  		# couldn't decode base64, just setting param naively
 						  		request.params[var_name] = params[var_name]
 					  	else:
 					  		try:
+					  			# download file and save to tmp file
 					  			r = requests.get(params[var_name]["url"], stream = True)
 					  		except:
+					  			# couldn't download file, just setting param naively
 					  			request.params[var_name] = params[var_name]
 					  		else:
 						  		if (r.status_code == requests.codes.ok):
+						  			# downloaded file and got normal status code. timpe to write to tmp.
 						  			data = r.raw.read(decode_content=True)
 							  		tmp_file.write(data)
 								  	request.params[var_name] = tmp_file.name
 							  	else:
+							  		# downloaded file but didn't get normal status code, just setting param naively
 							  		request.params[var_name] = params[var_name]
 				  		tmp_file.close()
 					# add rest key/values without any magic.
