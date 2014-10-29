@@ -14,9 +14,7 @@ def run(block, data = {}, api_key = None):
 
 	data = json.dumps(data)
 
-	api_key = api_key or os.environ.get('BLOCKSPRING_API_KEY')
-	if(not(api_key)):
-		api_key = ""
+	api_key = api_key or os.environ.get('BLOCKSPRING_API_KEY') or ""
 	
 	blockspring_url = os.environ.get('BLOCKSPRING_URL') or 'https://sender.blockspring.com'
 	block = block.split("/")[-1]
