@@ -12,13 +12,13 @@ def parse(input_params, json_parsed = False):
 	request = Request()
 
 	# try to parse inputs as json
-	if json_parsed == False:
+	if json_parsed == True:
+		params = input_params
+	else:
 		try:
 			params = json.loads(input_params)
 		except:
 			raise Exception("You didn't pass valid json inputs.")
-	else:
-		params = input_params
 
 	# if inputs json, check if they're a dictionary
 	if (type(params) is not dict):
