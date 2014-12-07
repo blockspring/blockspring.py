@@ -10,7 +10,7 @@ with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
 
 setup(
 	name = "blockspring",
-	version = "0.1.4",
+	version = "0.1.5",
 	description='Blockspring api wrapper',
 	long_description=long_description,
 
@@ -56,5 +56,5 @@ setup(
 	packages=find_packages(),
 
 	install_requires=['requests']
-		
+
 )
