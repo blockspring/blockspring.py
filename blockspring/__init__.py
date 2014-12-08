@@ -133,11 +133,10 @@ def runParsed(block, data = {}, api_key = None):
 			return parsed_results
 		else:
 			parsed_results["_headers"] = response.headers
+			return parse(parsed_results, True)
 	except:
 		# allow non-json results to pass through
 		return results
-
-	return parse(parsed_results, True)
 
 def define(block):
 	def processStdin():
