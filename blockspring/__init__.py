@@ -8,7 +8,7 @@ import re
 import tempfile
 from urlparse import urlparse
 
-def parse(input_params, json_parsed = False):
+def parse(input_params, json_parsed = True):
 	request = Request()
 
 	# try to parse inputs as json
