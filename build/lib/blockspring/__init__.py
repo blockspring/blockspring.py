@@ -8,14 +8,17 @@ import re
 import tempfile
 from urlparse import urlparse
 
-def parse(input_params):
+def parse(input_params, json_parsed = True):
 	request = Request()
 
 	# try to parse inputs as json
-	try:
-		params = json.loads(input_params)
-	except:
-		raise Exception("You didn't pass valid json inputs.")
+	if json_parsed == True:
+		params = input_params
+	else:
+		try:
+			params = json.loads(input_params)
+		except:
+			raise Exception("You didn't pass valid json inputs.")
 
 	# if inputs json, check if they're a dictionary
 	if (type(params) is not dict):
@@ -36,6 +39,12 @@ def parse(input_params):
 				for error in params[var_name]:
 					if (type(error) is dict) and ("title" in error):
 						request.addError(error)
+			elif ((var_name == "_headers") and type(params[var_name] is dict)):
+				try:
+					headers = dict(params[var_name])
+				except:
+					headers = params[var_name]
+				request.addHeaders(headers)
 			# add files to tempdir
 			elif (
 			# file must be dictionary
@@ -98,21 +107,43 @@ def run(block, data = {}, api_key = None):
 	results = response.text
 
 	try:
-		parsed_results = json.loads(results)
-
-		if (type(parsed_results) is not dict):
-			return parsed_results
+		return json.loads(results)
 	except:
 		# allow non-json results to pass through
 		return results
 
-	return parse(results)
+def runParsed(block, data = {}, api_key = None):
+	if type(data) is not dict:
+		raise Exception("your data needs to be a dictionary.")
+
+	data = json.dumps(data)
+
+	api_key = api_key or os.environ.get('BLOCKSPRING_API_KEY') or ""
+
+	blockspring_url = os.environ.get('BLOCKSPRING_URL') or 'https://sender.blockspring.com'
+	block = block.split("/")[-1]
+	response = requests.post( blockspring_url + "/api_v2/blocks/" + block + "?api_key=" + api_key, data = data , headers = {'content-type': 'application/json'})
+
+	results = response.text
+
+	try:
+		parsed_results = json.loads(results)
+
+		if (type(parsed_results) is not dict):
+			return parsed_results
+		else:
+			parsed_results["_headers"] = response.headers
+	except:
+		# allow non-json results to pass through
+		return results
+
+	return parse(parsed_results, True)
 
 def define(block):
 	def processStdin():
 		# check if something coming into stdin
 		if(not(sys.stdin.isatty())):
-			request = parse(sys.stdin.read())
+			request = parse(sys.stdin.read(), False)
 			sys.stdin.close()
 			return request
 		else:
@@ -147,12 +178,19 @@ class Request:
 	def __init__(self):
 		self.params = {}
 		self._errors = []
+		self._headers = {}
 
 	def getErrors(self):
 		return self._errors
 
 	def addError(self, error):
 		self._errors.append(error)
+
+	def addHeaders(self, headers):
+		self._headers = headers
+
+	def getHeaders(self):
+		return self._headers
 
 class Response:
 	def __init__(self):
