@@ -110,7 +110,7 @@ def run(block, data = {}, options = {}):
 
 	api_key = options["api_key"] or os.environ.get('BLOCKSPRING_API_KEY') or ""
 	cache = options["cache"] if ("cache" in options) else False
-	expiry = ("&expiry=" + options["expiry"]) if ("expiry" in options and options["expiry"] != None) else ""
+	expiry = ("&expiry=" + str(options["expiry"])) if ("expiry" in options and options["expiry"] != None) else ""
 
 	blockspring_url = os.environ.get('BLOCKSPRING_URL') or 'https://sender.blockspring.com'
 	block = block.split("/")[-1]
@@ -144,7 +144,7 @@ def runParsed(block, data = {}, options = {}):
 
 	api_key = options["api_key"] or os.environ.get('BLOCKSPRING_API_KEY') or ""
 	cache = options["cache"] if ("cache" in options) else False
-	expiry = ("&expiry=" + options["expiry"]) if ("expiry" in options and options["expiry"] != None) else ""
+	expiry = ("&expiry=" + str(options["expiry"])) if ("expiry" in options and options["expiry"] != None) else ""
 
 	blockspring_url = os.environ.get('BLOCKSPRING_URL') or 'https://sender.blockspring.com'
 	block = block.split("/")[-1]
