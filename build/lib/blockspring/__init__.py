@@ -92,17 +92,31 @@ def parse(input_params, json_parsed = True):
 
 	return request
 
-def run(block, data = {}, api_key = None):
-	if type(data) is not dict:
+def run(block, data = {}, options = {}):
+	if type(options) is str:
+	  options = {
+	    "api_key": options,
+	    "cache": False,
+	    "expiry": None
+	  }
+
+	if (not("api_key" in options)):
+	  options["api_key"] = None
+
+	if (type(data) is not dict):
 		raise Exception("your data needs to be a dictionary.")
 
 	data = json.dumps(data)
 
-	api_key = api_key or os.environ.get('BLOCKSPRING_API_KEY') or ""
+	api_key = options["api_key"] or os.environ.get('BLOCKSPRING_API_KEY') or ""
+	cache = options["cache"] if ("cache" in options) else False
+	expiry = ("&expiry=" + options["expiry"]) if ("expiry" in options and options["expiry"] != None) else ""
 
 	blockspring_url = os.environ.get('BLOCKSPRING_URL') or 'https://sender.blockspring.com'
 	block = block.split("/")[-1]
-	response = requests.post( blockspring_url + "/api_v2/blocks/" + block + "?api_key=" + api_key, data = data , headers = {'content-type': 'application/json'})
+
+	parameterized_url = "/api_v2/blocks/%s?api_key=%s&cache=%s%s" % (block, api_key, cache, expiry)
+	response = requests.post( blockspring_url + parameterized_url, data = data , headers = {'content-type': 'application/json'})
 
 	results = response.text
 
@@ -112,17 +126,31 @@ def run(block, data = {}, api_key = None):
 		# allow non-json results to pass through
 		return results
 
-def runParsed(block, data = {}, api_key = None):
-	if type(data) is not dict:
+def runParsed(block, data = {}, options = {}):
+	if type(options) is str:
+	  options = {
+	    "api_key": options,
+	    "cache": False,
+	    "expiry": None
+	  }
+
+	if (not("api_key" in options)):
+	  options["api_key"] = None
+
+	if (type(data) is not dict):
 		raise Exception("your data needs to be a dictionary.")
 
 	data = json.dumps(data)
 
-	api_key = api_key or os.environ.get('BLOCKSPRING_API_KEY') or ""
+	api_key = options["api_key"] or os.environ.get('BLOCKSPRING_API_KEY') or ""
+	cache = options["cache"] if ("cache" in options) else False
+	expiry = ("&expiry=" + options["expiry"]) if ("expiry" in options and options["expiry"] != None) else ""
 
 	blockspring_url = os.environ.get('BLOCKSPRING_URL') or 'https://sender.blockspring.com'
 	block = block.split("/")[-1]
-	response = requests.post( blockspring_url + "/api_v2/blocks/" + block + "?api_key=" + api_key, data = data , headers = {'content-type': 'application/json'})
+
+	parameterized_url = "/api_v2/blocks/%s?api_key=%s&cache=%s%s" % (block, api_key, cache, expiry)
+	response = requests.post( blockspring_url + parameterized_url, data = data , headers = {'content-type': 'application/json'})
 
 	results = response.text
 
