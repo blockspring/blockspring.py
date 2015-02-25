@@ -1,9 +1,11 @@
 from setuptools import setup, find_packages  # Always prefer setuptools over distutils
 from codecs import open  # To use a consistent encoding
 
+from version import __version__ as version
+
 setup(
 	name = "blockspring",
-	version = "0.1.9",
+	version = version,
 	description='Blockspring api wrapper',
 	long_description='\n'.join(
             [
