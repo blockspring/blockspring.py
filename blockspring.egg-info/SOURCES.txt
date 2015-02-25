@@ -1,7 +1,0 @@
-setup.py
-blockspring/__init__.py
-blockspring.egg-info/PKG-INFO
-blockspring.egg-info/SOURCES.txt
-blockspring.egg-info/dependency_links.txt
-blockspring.egg-info/requires.txt
-blockspring.egg-info/top_level.txt
