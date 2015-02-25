@@ -1,19 +1,16 @@
 from setuptools import setup, find_packages  # Always prefer setuptools over distutils
 from codecs import open  # To use a consistent encoding
-from os import path
-
-here = path.abspath(path.dirname(__file__))
-
-# Get the long description from the relevant file
-with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
-    long_description = f.read()
 
 setup(
 	name = "blockspring",
 	version = "0.1.9",
 	description='Blockspring api wrapper',
-	long_description=long_description,
-
+	long_description='\n'.join(
+            [
+                open('README.rst', 'rb').read().decode('utf-8'),
+                open('DESCRIPTION.rst', 'rb').read().decode('utf-8'),
+            ]
+        ),
 	# The project's main homepage
 	url='https://www.blockspring.com',
 
