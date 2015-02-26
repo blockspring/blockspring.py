@@ -49,3 +49,10 @@ Contact
 ~~~~~~~
 
 Email us: founders@blockspring.com
+
+Thank You to Our Contributors
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Sang Han (jjangsangy_)
+
+.. _jjangsangy: https://github.com/jjangsangy
