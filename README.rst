@@ -20,7 +20,7 @@ Save the following script to an example.py file:
     import blockspring
 
     def myFunction(request, response):
-        mySum = request["params"]["num1"] + request["params"]["num2"]
+        mySum = request.params["num1"] + request.params["num2"]
 
         response.addOutput('sum', mySum)
 
