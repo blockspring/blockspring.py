@@ -1,18 +1,11 @@
 from setuptools import setup, find_packages  # Always prefer setuptools over distutils
 from codecs import open  # To use a consistent encoding
 
-from version import __version__ as version
-
 setup(
 	name = "blockspring",
-	version = version,
+	version = '0.1.13',
 	description='Blockspring api wrapper',
-	long_description='\n'.join(
-            [
-                open('README.rst', 'rb').read().decode('utf-8'),
-                open('DESCRIPTION.rst', 'rb').read().decode('utf-8'),
-            ]
-        ),
+	long_description="Python module to assist in creating blocks on Blockspring.",
 	# The project's main homepage
 	url='https://www.blockspring.com',
 
