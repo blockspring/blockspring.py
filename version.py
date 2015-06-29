@@ -1,1 +1,2 @@
-blockspring/__version__.py
+# Set Version Info
+exec(open('blockspring/__version__.py').read())
